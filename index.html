@@ -8,42 +8,218 @@
   
   <title>Frontend Mentor | Interactive rating component</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
+    @import url('https://fonts.googleapis.com/css2?family=Overpass:wght@100..900&display=swap');
+
+     :root {
+      --small: 0.7rem;
+      --normal: 0.938rem;
+      --bigger: 1.2rem;
+      --orange: hsl(25, 97%, 53%);
+      --white: hsl(0, 0%, 100%);
+      --lightgrey: hsl(217, 12%, 63%);
+      --darkblue: hsl(213, 19%, 18%);
+      --verydarkblue: hsl(216, 12%, 8%);
+    }
+    html {
+      font-size: 100%;
+    }
+    body {
+      background-color: black;
+      font-family: "Overpass", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    section {
+      width: 375px;
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: var(--bigger);
+      font-weight: 700;
+    }
+    h2 {
+      font-weight: 400;
+      margin: 1rem 0 0.2rem 0;
+    }
+    legend {
+      font-size: var(--normal);
+      color: var(--lightgrey);
+    }
+    p {
+      font-size: var(--small);
+      color: var(--lightgrey);
+      text-align: center;
+    }
+    button {
+      background-color: var(--orange);
+      color: #000;
+      font-weight: 700;
+      border: unset;
+      border-radius: 1rem;
+      padding: 0.5rem;
+      width: 100%;
+      margin-top: 2rem;
+    }
+    button:hover {
+      background-color: var(--white);
+      cursor: pointer;
+    }
+    .grey-container {
+      max-width: 375px;
+      border-radius: 1rem;
+      background: var(--verydarkblue);
+      color: var(--white);
+      padding: 2em;
+    }
+    .start-container {
+      background-color: var(--darkblue);
+      border-radius: 50%;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      height: 2rem;
+      width: 2rem;
+    }
+    .radio-box {
+      margin-top: 1rem;
+      display: flex;
+      flex-flow: row;
+      justify-content: space-between;
+      position: relative;
+    }
+    label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      height: 30px;
+      width: 30px;
+      background-color: var(--darkblue);
+      border-radius: 50%;
+      cursor: pointer;
+      color: var(--lightgrey);
+      font-size: var(--small);
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+    label:hover {
+      background-color: var(--orange);
+      color: #000;
+    }
+    .active {
+      color: #000;
+      background-color: var(--white);
+    }
+    .successmsg {
+      display: none;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        height: 5rem;
+        width: auto;
+      }
+
+      .ratingresult {
+        background-color: var(--darkblue);
+        border-radius: 1rem;
+        padding: 0.5rem 0.7rem;
+        color: var(--orange);
+      }
+    }
+    .startmsg {
+      display: flex;
+      flex-flow: column;
+    }
   </style>
 </head>
 <body>
-
   <!-- Rating state start -->
-
-  How did we do?
-
-  Please let us know how we did with your support request. All feedback is appreciated 
-  to help us improve our offering!
-
-  1 2 3 4 5
-
-  Submit
-
+  <section class="startmsg grey-container">
+    <div class="start-container">
+      <img src="images/icon-star.svg" alt="star-logo">
+    </div>
+    <h1>How did we do?</h1>
+    <form>
+      <legend>Please let us know how we did with your support request. All feedback is appreciated 
+        to help us improve our offering!</legend>
+      <div class="radio-box">
+        <input type="radio" id="rating1" name="rating" value="1">
+        <label for="rating1">1</label>
+        <input type="radio" id="rating2" name="rating" value="2">
+        <label for="rating2">2</label>
+        <input type="radio" id="rating3" name="rating" value="3">
+        <label for="rating3">3</label>
+        <input type="radio" id="rating4" name="rating" value="4">
+        <label for="rating4">4</label>
+        <input type="radio" id="rating5" name="rating" value="5">
+        <label for="rating5">5</label>
+      </div>
+        <button type="submit">SUBMIT</button>
+    </form>
+  </section>
+    
   <!-- Rating state end -->
 
   <!-- Thank you state start -->
-
-  You selected <!-- Add rating here --> out of 5
-
-  Thank you!
-
-  We appreciate you taking the time to give a rating. If you ever need more support, 
-  don’t hesitate to get in touch!
-
+  <section class="successmsg grey-container">
+    <img src="images/illustration-thank-you.svg" alt="thank you image">
+    <p class="ratingresult">You selected <span id="rating"></span> out of 5</p>
+    <h2>Thank you!</h2>
+    <p>
+      We appreciate you taking the time to give a rating. If you ever need more support, 
+    don’t hesitate to get in touch!
+    </p>
+  </section>
   <!-- Thank you state end -->
-
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
 </body>
+<script>
+  const form = document.querySelector('form');
+    const start = document.querySelector('.startmsg');
+    const success = document.querySelector('.successmsg');
+    let rating = document.getElementById('rating');
+
+    document.querySelector('.radio-box').addEventListener('click', (e) => {
+      if (e.target.tagName === 'INPUT' && e.target.type === 'radio') {
+        // Remove "active" class from all labels
+        document.querySelectorAll('.radio-box label').forEach(label => {
+          label.classList.remove('active');
+        });
+
+        // Add "active" class to the label associated with the clicked radio button
+        const label = document.querySelector(`label[for="${e.target.id}"]`);
+        if (label) {
+          label.classList.add('active');
+        }
+      }
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const data = new FormData(form);
+      let output = "";
+      
+      for (const entry of data) {
+        output = entry[1];
+      }
+      rating.innerHTML = output;
+      success.style.display = "flex";
+      start.style.display = "none";
+    });
+</script>
 </html>
